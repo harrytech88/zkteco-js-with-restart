@@ -1,4 +1,4 @@
-<p align="center"><a href="https://www.zkteco.com/" target="_blank"><img src="https://raw.githubusercontent.com/coding-libs/zkteco-js/master/logo.jpg" width="400" alt="Zkteco Logo"></a></p>
+<p align="center"><a href="https://www.zkteco.com/" target="_blank"><img src="https://raw.githubusercontent.com/harrytech88/zkteco-js-with-restart/master/logo.jpg" width="400" alt="Zkteco Logo"></a></p>
 
 
 ## <span style="color:red;">Warning</span>
@@ -6,6 +6,7 @@
 **⚠️ This repository is not recommended for use in production. ⚠️**
 
 This repository is currently in development and may contain bugs or incomplete features. Use at your own risk and do not deploy to a production environment.
+This is the minor upgrad from zkteco-js, adding a device restart function. The restart function can be used on older devices that often experience access issues, possibly due to resource leaks. Developers can use the restart function to restart the device every night.
 
 # About zkteco-js
 The zkteco-js library provides a robust solution for Node.js developers to interface with ZK BioMetric Fingerprint Attendance Devices. Its user-friendly API allows seamless extraction of data, such as registered users, logs, and device versions. Developers can also add users, retrieve real-time logs, and clear attendance records. Using a socket connection, the library ensures fast and reliable data exchange. Whether creating an attendance system or a time-and-attendance management application, zkteco-js is the essential tool for integrating biometric devices efficiently.
@@ -13,19 +14,19 @@ The zkteco-js library provides a robust solution for Node.js developers to inter
 ### Installation
 
 ```bash
-npm i zkteco-js
+npm i zkteco-js-with-restart
 ```
 
 Or, if you prefer Yarn:
 
 ```bash
-yarn add zkteco-js
+yarn add zkteco-js-with-restart
 ```
 
 ### Usage Example
 
 ```js
-const Zkteco = require("zkteco-js");
+const Zkteco = require("zkteco-js-with-restart");
 
 const manageZktecoDevice = async () => {
     const device = new Zkteco("192.168.1.106", 4370, 5200, 5000);
@@ -74,6 +75,7 @@ manageZktecoDevice();
 - `getAttendanceSize()` - Retrieves the total number of attendance records stored on the device.
 - `clearAttendanceLog()` - Clears all attendance logs from the device.
 - `disconnect()` - Disconnects the device from the network.
+- `restart()` - Reboot device.
 - <span style="color: green; font-weight: bold;">🆕 `clearData()` - Clear All Data from the device (all users,attendances logs etc ).</span>
 - <span style="color: green; font-weight: bold;">🆕 `voiceTest()` - Voice Test.</span>
 - <span style="color: green; font-weight: bold;">🆕 `getVendor()` - get vendor name.</span>
@@ -82,10 +84,10 @@ manageZktecoDevice();
 
 ## Contributing
 
-Please see [CONTRIBUTING](https://github.com/coding-libs/zkteco-js/graphs/contributors) for details.
+Please see [CONTRIBUTING](https://github.com/harrytech88/zkteco-js-with-restart/graphs/contributors) for details.
 ## Security
 
-If you've found a bug regarding security please mail [codinglibs4u@gmail.com](mailto:codinglibs4u@gmail.com) instead of using the issue tracker.
+If you've found a bug regarding security please mail [harrydau88@outlook.com](mailto:harrydau88@outlook.com) instead of using the issue tracker.
 
 ## Alternatives
 
