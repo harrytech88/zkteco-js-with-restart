@@ -6,7 +6,7 @@
 
 
 const net = require('net')
-const {MAX_CHUNK, COMMANDS, REQUEST_DATA} = require('./helper/command')
+const { MAX_CHUNK, COMMANDS, REQUEST_DATA } = require('./helper/command')
 const timeParser = require('./helper/time');
 
 const {
@@ -20,8 +20,8 @@ const {
     decodeTCPHeader
 } = require('./helper/utils')
 
-const {log} = require('./logs/log')
-const {error} = require('console')
+const { log } = require('./logs/log')
+const { error } = require('console')
 
 class ZTCP {
     constructor(ip, port, timeout) {
@@ -333,7 +333,7 @@ class ZTCP {
             const header = decodeTCPHeader(reply.subarray(0, 16))
             switch (header.commandId) {
                 case COMMANDS.CMD_DATA: {
-                    resolve({data: reply.subarray(16), mode: 8})
+                    resolve({ data: reply.subarray(16), mode: 8 })
                     break;
                 }
                 case COMMANDS.CMD_ACK_OK:
@@ -365,7 +365,7 @@ class ZTCP {
                     const internalCallback = (replyData, err = null) => {
                         // this.socket && this.socket.removeListener('data', handleOnData)
                         timer && clearTimeout(timer)
-                        resolve({data: replyData, err})
+                        resolve({ data: replyData, err })
 
                     }
 
@@ -484,7 +484,7 @@ class ZTCP {
      *  return { data: records, err: Error } when receiving requested data
      */
 
-    async getAttendances(callbackInProcess = () => {}) {
+    async getAttendances(callbackInProcess = () => { }) {
         try {
             // Free any existing buffer data to prepare for a new request
             if (this.socket) {
@@ -1038,7 +1038,7 @@ class ZTCP {
     }
 
 
-// Clears the attendance logs on the device
+    // Clears the attendance logs on the device
     async clearAttendanceLog() {
         try {
             // Execute the command to clear attendance logs
@@ -1051,7 +1051,7 @@ class ZTCP {
         }
     }
 
-// Clears all data on the device
+    // Clears all data on the device
     async clearData() {
         try {
             // Execute the command to clear all data
@@ -1064,7 +1064,7 @@ class ZTCP {
         }
     }
 
-    async getRealTimeLogs(cb = () => {}) {
+    async getRealTimeLogs(cb = () => { }) {
         this.replyId++; // Increment the reply ID for this request
 
         try {
@@ -1097,6 +1097,19 @@ class ZTCP {
         } catch (err) {
             // Handle errors and reject the promise
             console.error('Error getting real-time logs:', err);
+            throw err;
+        }
+    }
+
+    async restart() {
+        try {
+            // Execute the command to restart the device
+            await this.executeCmd(COMMANDS.CMD_RESTART, '');
+        } catch (err) {
+            // Log the error for debugging
+            console.error('Error restarting device:', err);
+
+            // Re-throw the error for the caller to handle
             throw err;
         }
     }

@@ -7,7 +7,7 @@
 const ZTCP = require('./src/ztcp')
 const ZUDP = require('./src/zudp')
 
-const {ZkError, ERROR_TYPES} = require('./src/exceptions/handler')
+const { ZkError, ERROR_TYPES } = require('./src/exceptions/handler')
 
 class ZktecoJs {
     constructor(ip, port, timeout, inport) {
@@ -346,6 +346,13 @@ class ZktecoJs {
 
     setTimerSchedule(cb, timer) {
         this.timer = setTimeout(cb, timer)
+    }
+
+    async restart() {
+        return await this.functionWrapper(
+            () => this.ztcp.restart(),
+            () => this.zudp.restart()
+        )
     }
 
 }

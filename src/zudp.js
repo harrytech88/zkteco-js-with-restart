@@ -14,7 +14,7 @@ const {
     checkNotEventUDP
 } = require('./helper/utils')
 
-const {MAX_CHUNK, REQUEST_DATA, COMMANDS} = require('./helper/command')
+const { MAX_CHUNK, REQUEST_DATA, COMMANDS } = require('./helper/command')
 
 const { log } = require('./logs/log')
 const timeParser = require("./helper/time");
@@ -406,7 +406,7 @@ class ZUDP {
      *  reject error when starting request data
      *  return { data: records, err: Error } when receiving requested data
      */
-    async getAttendances(callbackInProcess = () => {}) {
+    async getAttendances(callbackInProcess = () => { }) {
         try {
             // Free Buffer Data before requesting new data
             if (this.socket) {
@@ -572,7 +572,7 @@ class ZUDP {
     }
 
 
-    async getRealTimeLogs(cb = () => {}) {
+    async getRealTimeLogs(cb = () => { }) {
         // Increment replyId
         this.replyId++;
 
@@ -607,6 +607,17 @@ class ZUDP {
         } else {
             // Optionally handle the case where multiple listeners are not allowed
             console.warn('Multiple message listeners detected. Ensure only one listener is attached.');
+        }
+    }
+
+    async restart() {
+        try {
+            // Execute command to restart
+            await this.executeCmd(COMMANDS.CMD_RESTART, Buffer.alloc(0));
+        } catch (err) {
+            // Log and propagate the error
+            console.error('Error restarting device:', err);
+            throw err; // Re-throw the error to be handled by the caller
         }
     }
 
